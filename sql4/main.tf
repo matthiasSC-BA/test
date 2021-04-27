@@ -9,6 +9,13 @@ module "sql-db" {
   deletion_protection = false
   
   random_instance_name = true
-  
-
+  ip_configuration = {
+    ipv4_enabled        = true
+    private_network     = null
+    require_ssl         = true
+    authorized_networks = [{
+      name  = "sample-gcp-health-checkers-range"
+      value = "0.0.0.0/0"
+    }]
+  }
 }
