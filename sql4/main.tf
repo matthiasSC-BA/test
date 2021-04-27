@@ -9,6 +9,7 @@ module "sql-db" {
   deletion_protection = false
   
   random_instance_name = true
+  /*
   ip_configuration = {
     ipv4_enabled        = true
     private_network     = null
@@ -18,4 +19,5 @@ module "sql-db" {
       value = "0.0.0.0/0"
     }]
   }
+  */
 }
