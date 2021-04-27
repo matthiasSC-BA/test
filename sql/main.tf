@@ -31,10 +31,12 @@ locals {
   binary_log_enabled = var.availability_type == "REGIONAL" ? true : lookup(var.backup_configuration, "binary_log_enabled", null)
   backups_enabled    = var.availability_type == "REGIONAL" ? true : lookup(var.backup_configuration, "enabled", null)
 }
+   
 resource "random_id" "suffix" {
   count = var.random_instance_name ? 1 : 0
   byte_length = 4
 }
+   
 resource "google_sql_database_instance" "default" {
   provider            = google
   project             = "t-vra-gfk-terraform"
@@ -105,6 +107,8 @@ resource "google_sql_database_instance" "default" {
   }
   depends_on = [null_resource.module_depends_on]
 }
+   
+   
 resource "google_sql_database" "default" {
   count      = var.enable_default_db ? 1 : 0
   name       = var.db_name
@@ -113,6 +117,7 @@ resource "google_sql_database" "default" {
   charset    = var.db_charset
   collation  = var.db_collation
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
+}
 
 resource "random_id" "user-password" {
   keepers = {
