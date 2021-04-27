@@ -16,17 +16,8 @@
  */
 
  
- resource "google_sql_database" "defaulte" {
-  count      = 1
-  name       = "testdb3"
-  project    = "t-vra-gfk-terraform"
-  instance   = "testdb2"
-  charset    = var.db_charset
-  collation  = var.db_collation
-  
-}
    
- /*  
+ 
 locals {
   default_user_host        = "%"
   ip_configuration_enabled = length(keys(var.ip_configuration)) > 0 ? true : false
@@ -122,16 +113,7 @@ resource "google_sql_database" "default" {
   charset    = var.db_charset
   collation  = var.db_collation
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
-}
-resource "google_sql_database" "additional_databases" {
-  for_each   = local.databases
-  project    = "t-vra-gfk-terraform"
-  name       = each.value.name
-  charset    = lookup(each.value, "charset", null)
-  collation  = lookup(each.value, "collation", null)
-  instance   = google_sql_database_instance.default.name
-  depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
-}
+
 resource "random_id" "user-password" {
   keepers = {
     name = google_sql_database_instance.default.name
@@ -148,18 +130,10 @@ resource "google_sql_user" "default" {
   password   = var.user_password == "" ? random_id.user-password.hex : var.user_password
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
 }
-resource "google_sql_user" "additional_users" {
-  for_each   = local.users
-  project    = "t-vra-gfk-terraform"
-  name       = each.value.name
-  password   = lookup(each.value, "password", random_id.user-password.hex)
-  host       = lookup(each.value, "host", var.user_host)
-  instance   = google_sql_database_instance.default.name
-  depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
-}
+
 resource "null_resource" "module_depends_on" {
   triggers = {
     value = length(var.module_depends_on)
   }
 }
-*/
+
