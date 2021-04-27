@@ -1,7 +1,7 @@
 module "sql-db" {
   source  = "GoogleCloudPlatform/sql-db/google//modules/mysql"
   version = "4.0.0"
-  name  = "dbpoc2"
+  name  = var.name"
   database_version = "MYSQL_5_7"
   project_id = "t-vra-gfk-terraform"
   zone = "c"
