@@ -272,7 +272,7 @@ variable "module_depends_on" {
 variable "deletion_protection" {
   description = "Used to block Terraform from deleting a SQL Instance."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "read_replica_deletion_protection" {
