@@ -1,19 +1,15 @@
-/**
- * Copyright 2019 Google LLC
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
 
+variable "project_id" {
+  description = "The project ID to manage the Cloud SQL resources"
+  type        = string
+  default = "t-vra-gfk-terraform"
+}
+
+variable "name" {
+  type        = string
+  description = "The name of the Cloud SQL resources"
+  default = "dbtest1"
+}
 
 variable "random_instance_name" {
   type        = bool
@@ -21,9 +17,19 @@ variable "random_instance_name" {
   default     = false
 }
 
+// required
+variable "database_version" {
+  description = "The database version to use"
+  type        = string
+  default = "MYSQL_5_7"
+}
 
-
-
+// required
+variable "region" {
+  description = "The region of the Cloud SQL resources"
+  type        = string
+  default     = "europe-west3"
+}
 
 // Master
 variable "tier" {
@@ -32,7 +38,11 @@ variable "tier" {
   default     = "db-n1-standard-1"
 }
 
-
+variable "zone" {
+  description = "The zone for the master instance, it should be something like: `us-central1-a`, `us-east1-c`."
+  type        = string
+  default = "europe-west3-c"
+}
 
 variable "activation_policy" {
   description = "The activation policy for the master instance. Can be either `ALWAYS`, `NEVER` or `ON_DEMAND`."
