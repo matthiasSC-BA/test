@@ -8,7 +8,7 @@ variable "project_id" {
 variable "name" {
   type        = string
   description = "The name of the Cloud SQL resources"
-  default = "dbtest1"
+  default = "dbtest2"
 }
 
 variable "random_instance_name" {
