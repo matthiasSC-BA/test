@@ -6,8 +6,6 @@ module "sql-db" {
   project_id = "t-vra-gfk-terraform"
   zone = "c"
   region = "europe-west3"
-
-  deletion_protection = false
   
   random_instance_name = true
   
