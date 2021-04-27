@@ -116,7 +116,7 @@ resource "google_sql_database" "default" {
   instance   = google_sql_database_instance.defaulte.name
   charset    = var.db_charset
   collation  = var.db_collation
-  depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
+  depends_on = [null_resource.module_depends_on, google_sql_database_instance.defaulte]
 }
 
 resource "random_id" "user-password" {
