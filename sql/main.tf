@@ -37,7 +37,7 @@ resource "random_id" "suffix" {
   byte_length = 4
 }
    
-resource "google_sql_database_instance" "default" {
+resource "google_sql_database_instance" "defaulte" {
   provider            = google
   project             = "t-vra-gfk-terraform"
   name                = "testdb"
@@ -113,7 +113,7 @@ resource "google_sql_database" "default" {
   count      = var.enable_default_db ? 1 : 0
   name       = var.db_name
   project    = "t-vra-gfk-terraform"
-  instance   = google_sql_database_instance.default.name
+  instance   = google_sql_database_instance.defaulte.name
   charset    = var.db_charset
   collation  = var.db_collation
   depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
@@ -121,19 +121,19 @@ resource "google_sql_database" "default" {
 
 resource "random_id" "user-password" {
   keepers = {
-    name = google_sql_database_instance.default.name
+    name = google_sql_database_instance.defaulte.name
   }
   byte_length = 8
-  depends_on  = [null_resource.module_depends_on, google_sql_database_instance.default]
+  depends_on  = [null_resource.module_depends_on, google_sql_database_instance.defaulte]
 }
 resource "google_sql_user" "default" {
   count      = var.enable_default_user ? 1 : 0
   name       = var.user_name
   project    = "t-vra-gfk-terraform"
-  instance   = google_sql_database_instance.default.name
+  instance   = google_sql_database_instance.defaulte.name
   host       = var.user_host
   password   = var.user_password == "" ? random_id.user-password.hex : var.user_password
-  depends_on = [null_resource.module_depends_on, google_sql_database_instance.default]
+  depends_on = [null_resource.module_depends_on, google_sql_database_instance.defaulte]
 }
 
 resource "null_resource" "module_depends_on" {
