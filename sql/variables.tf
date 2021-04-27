@@ -176,7 +176,7 @@ variable "read_replica_name_suffix" {
 variable "db_name" {
   description = "The name of the default database to create"
   type        = string
-  default     = "default"
+  default     = "defaulte"
 }
 
 variable "db_charset" {
@@ -204,7 +204,7 @@ variable "additional_databases" {
 variable "user_name" {
   description = "The name of the default user"
   type        = string
-  default     = "default"
+  default     = "defaulte"
 }
 
 variable "user_host" {
