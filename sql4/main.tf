@@ -14,7 +14,7 @@ module "sql-db" {
     private_network     = null
     require_ssl         = true
     authorized_networks = [{
-      name  = "sample-gcp-health-checkers-range"
+      name  = "every-range"
       value = "0.0.0.0/0"
     }]
   }
