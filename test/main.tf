@@ -4,7 +4,7 @@ provider "google" {
   zone    = "europe-west3-a"
 }
 resource "google_compute_instance" "vm_instance" {
-  name         = "terraform-instance"
+  name         = "terraform-instance-test"
   machine_type = "e2-micro"
 
   boot_disk {
